@@ -16,3 +16,11 @@ I spent a little time thinking about when to trigger the update function, and ha
 # Web router 
 
 I think I'll stick with my simple clojure/jetty router I've used before to serve up javascript for the UX. The interesting bit of this will be the UX and the data updates.
+
+# UI 
+
+I'd like to do this one in full TypeScript, have a build system package it up into a javascript to have the web router server the file.
+
+First things first is to pick a simple build system.
+
+[TS Build System Assessment](dev/docs/TS Build System Assessment.ods)
