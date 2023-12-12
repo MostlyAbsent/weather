@@ -13,3 +13,6 @@ I spent a little time thinking about when to trigger the update function, and ha
 
 [Update Trigger Assessment](dev/docs/Update Trigger Assessment.ods)
 
+# Web router 
+
+I think I'll stick with my simple clojure/jetty router I've used before to serve up javascript for the UX. The interesting bit of this will be the UX and the data updates.
