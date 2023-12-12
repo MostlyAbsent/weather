@@ -21,6 +21,10 @@ There are many files with different sets of data, I've selected the Short Foreca
 
 Final url  ftp://ftp.bom.gov.au/anon/gen/fwo/IDW14199.xml
 
+### Data Shape
+
+I'll need to explore the data packet for a moment, extract any information I'll want to use, and figure the shape of the data to load into Prisma.
+
 # Web router 
 
 The selection of create-t3-app should make my router un-needed.
