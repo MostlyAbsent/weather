@@ -27,9 +27,9 @@ I'll need to explore the data packet for a moment, extract any information I'll 
 
 All data is within a greater `<product>` tag, the metadata is stored in an `<amoc>` tag.
 
-| Data       | Path                | Example              | Note                     |
-|------------|---------------------|----------------------|--------------------------|
-| Expiration | <amoc><expiry-time> | 2023-12-13T01:22:44Z | To test cached validity. |
+| Data       | Path                  | Example              | Note                     |
+|------------|-----------------------|----------------------|--------------------------|
+| Expiration | `<amoc><expiry-time>` | 2023-12-13T01:22:44Z | To test cached validity. |
 
 The bulk of the data is a `<forcecast>`, which is a set of `<area>`s.
 
