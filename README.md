@@ -21,6 +21,7 @@ I think I'll stick with my simple clojure/jetty router I've used before to serve
 
 I'd like to do this one in full TypeScript, have a build system package it up into a javascript to have the web router server the file.
 
-First things first is to pick a simple build system.
+First things first is to pick a full-stack framework. I've chosen create-t3-app, mostly due to the preference for TypeScript and Prisma.
 
 [TS Build System Assessment](dev/docs/TS Build System Assessment.ods)
+ 
