@@ -15,7 +15,7 @@ I spent a little time thinking about when to trigger the update function, and ha
 
 # Web router 
 
-I think I'll stick with my simple clojure/jetty router I've used before to serve up javascript for the UX. The interesting bit of this will be the UX and the data updates.
+The selection of create-t3-app should make my router un-needed.
 
 # UI 
 
