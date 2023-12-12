@@ -13,6 +13,14 @@ I spent a little time thinking about when to trigger the update function, and ha
 
 [Update Trigger Assessment](dev/docs/Update Trigger Assessment.ods)
 
+## Data source
+
+The BOM has an ftp server; ftp://ftp.bom.gov.au/anon/gen/fwo/
+
+There are many files with different sets of data, I've selected the Short Forecast for the whole state IDW14199.xml.
+
+Final url  ftp://ftp.bom.gov.au/anon/gen/fwo/IDW14199.xml
+
 # Web router 
 
 The selection of create-t3-app should make my router un-needed.
