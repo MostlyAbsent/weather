@@ -58,6 +58,10 @@ Locations have a Parent ID referring to the Public District they belong to, and 
 
 I learned that the minimum temperature is optional (not present on index 0 periods), and there is an optional range for the amount of rain.
 
+### Data importer
+
+I'm going to make this in clojure. I like it a lot for etl.
+
 # Web router 
 
 The selection of create-t3-app should make my router un-needed.
