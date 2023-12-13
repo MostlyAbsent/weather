@@ -10,11 +10,42 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model Region {
+    id       Int             @id @default(autoincrement())
+    aac      String          @unique
+    districs PublicDistric[]
+}
 
-    @@index([name])
+model PublicDistric {
+    id        Int        @id @default(autoincrement())
+    aac       String     @unique
+    locations Location[]
+    Region    Region     @relation(fields: [region], references: [aac])
+    region    String
+}
+
+model Location {
+    id             Int              @id @default(autoincrement())
+    aac            String           @unique
+    description    String
+    forcastPeriods ForecastPeriod[]
+    PublicDistric  PublicDistric?   @relation(fields: [distric], references: [aac])
+    distric        String
+}
+
+model ForecastPeriod {
+    id                        Int      @id @default(autoincrement())
+    index                     Int
+    startTime                 DateTime
+    endTime                   DateTime
+    startTimeAWST             DateTime
+    endTimeAWST               DateTime
+    forecastIconCode          Int
+    tempMax                   Int
+    tempMin                   Int?
+    precis                    String
+    precipitiationProbability Int
+    precipitiationRange       String?
+    location                  Location @relation(fields: [area], references: [aac])
+    area                      String
 }
