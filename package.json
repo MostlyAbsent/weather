@@ -1,5 +1,6 @@
 {
 	"devDependencies": {
-		"prettier-plugin-prisma": "^5.0.0"
+		"prettier-plugin-prisma": "^5.0.0",
+		"prisma": "^5.7.0"
 	}
 }
