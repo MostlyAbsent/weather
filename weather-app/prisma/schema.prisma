@@ -10,10 +10,18 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model Forecast {
+    id     Int      @id @default(autoincrement())
+    expiry DateTime
+    Region Region[]
+}
+
 model Region {
-    id       Int             @id @default(autoincrement())
-    aac      String          @unique
-    districs PublicDistric[]
+    id         Int             @id @default(autoincrement())
+    aac        String          @unique
+    districs   PublicDistric[]
+    forecast   Forecast        @relation(fields: [forecastID], references: [id])
+    forecastID Int
 }
 
 model PublicDistric {
