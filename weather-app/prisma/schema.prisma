@@ -19,12 +19,12 @@ model Forecast {
 model Region {
     id         Int             @id @default(autoincrement())
     aac        String          @unique
-    districs   PublicDistric[]
+    districs   PublicDistrict[]
     forecast   Forecast        @relation(fields: [forecastID], references: [id])
     forecastID Int
 }
 
-model PublicDistric {
+model PublicDistrict {
     id        Int        @id @default(autoincrement())
     aac       String     @unique
     locations Location[]
@@ -37,7 +37,7 @@ model Location {
     aac            String           @unique
     description    String
     forcastPeriods ForecastPeriod[]
-    PublicDistric  PublicDistric?   @relation(fields: [distric], references: [aac])
+    PublicDistric  PublicDistrict?   @relation(fields: [distric], references: [aac])
     distric        String
 }
 
