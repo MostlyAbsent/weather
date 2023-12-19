@@ -11,49 +11,28 @@ datasource db {
 }
 
 model Forecast {
-    id     Int      @id @default(autoincrement())
-    expiry DateTime
-    Region Region[]
-}
-
-model Region {
-    id         Int             @id @default(autoincrement())
-    aac        String          @unique
-    districs   PublicDistrict[]
-    forecast   Forecast        @relation(fields: [forecastID], references: [id])
-    forecastID Int
-}
-
-model PublicDistrict {
-    id        Int        @id @default(autoincrement())
-    aac       String     @unique
-    locations Location[]
-    region    Region     @relation(fields: [regionKey], references: [aac])
-    regionKey String
-}
-
-model Location {
     id             Int              @id @default(autoincrement())
-    aac            String           @unique
-    description    String
-    forcastPeriods ForecastPeriod[]
-    PublicDistric  PublicDistrict?   @relation(fields: [distric], references: [aac])
-    distric        String
+    expiry         DateTime
+    ForecastPeriod ForecastPeriod[]
 }
 
 model ForecastPeriod {
-    id                        Int      @id @default(autoincrement())
-    index                     Int
-    startTime                 DateTime
+    id Int @id @default(autoincrement())
+
+    districtKey               String
     endTime                   DateTime
-    startTimeAWST             DateTime
-    endTimeAWST               DateTime
+    forecast                  Forecast @relation(fields: [forecastID], references: [id])
+    forecastID                Int
     forecastIconCode          Int
-    tempMax                   Int
-    tempMin                   Int?
-    precis                    String
+    index                     Int
+    locationDescription       String
+    locationKey               String
     precipitiationProbability Int
     precipitiationRange       String?
-    location                  Location @relation(fields: [area], references: [aac])
-    area                      String
+    precis                    String
+    regionKey                 String
+    startTime                 DateTime
+    startTimeAWST             DateTime
+    tempMax                   Int
+    tempMin                   Int?
 }
