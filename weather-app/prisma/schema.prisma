@@ -20,6 +20,7 @@ model ForecastPeriod {
     id Int @id @default(autoincrement())
 
     districtKey               String
+    districtDescription       String
     endTime                   DateTime
     forecast                  Forecast @relation(fields: [forecastID], references: [id])
     forecastID                Int
@@ -31,8 +32,8 @@ model ForecastPeriod {
     precipitiationRange       String?
     precis                    String
     regionKey                 String
+    regionDescription         String
     startTime                 DateTime
-    startTimeAWST             DateTime
     tempMax                   Int
     tempMin                   Int?
 }
