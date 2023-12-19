@@ -64,6 +64,8 @@ I'm going to make this in clojure. I like it a lot for etl.
 
 In thinking about it when it comes to deployment I don't think this needs to be part of the active build, I can just pop a jar into the weather-app repo and let it do it's thing.
 
+Prisma stores DateTimes and unix timestamps, nice and easy to work with.
+
 # Web router 
 
 The selection of create-t3-app should make my router un-needed.
