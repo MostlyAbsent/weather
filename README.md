@@ -62,6 +62,8 @@ I learned that the minimum temperature is optional (not present on index 0 perio
 
 I'm going to make this in clojure. I like it a lot for etl.
 
+In thinking about it when it comes to deployment I don't think this needs to be part of the active build, I can just pop a jar into the weather-app repo and let it do it's thing.
+
 # Web router 
 
 The selection of create-t3-app should make my router un-needed.
