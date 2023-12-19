@@ -1,0 +1,6 @@
+{:paths ["src/clj"]
+ :deps {}
+ :aliases
+ {:build
+  {:deps {}
+   :ns-default build}}}
