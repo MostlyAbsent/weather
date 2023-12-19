@@ -20,8 +20,8 @@ model PublicDistric {
     id        Int        @id @default(autoincrement())
     aac       String     @unique
     locations Location[]
-    Region    Region     @relation(fields: [region], references: [aac])
-    region    String
+    region    Region     @relation(fields: [regionKey], references: [aac])
+    regionKey String
 }
 
 model Location {
