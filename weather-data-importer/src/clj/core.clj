@@ -50,6 +50,15 @@
 (defmethod forecast-content :default
   [args]
   {:unhandled-key true})
+
+(defn forecast-period-parser
+  [{:keys [attrs content]}]
+
+  (merge {:index (:index attrs)
+          :startTime (unixtime (:start-time-utc attrs))
+          :endTime (unixtime (:end-time-utc attrs))}
+         (reduce #(conj %1  (forecast-content %2)) {} content)))
+
 (defmulti area (fn [x] (get-in x [:attrs :type])))
 
 (defmethod area "region"
