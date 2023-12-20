@@ -66,10 +66,21 @@
   {:region {:aac (:aac attrs)
             :description (:description attrs)}})
 
-(defmethod area :default
-  [args]
-  )
+(defmethod area "public-district"
+  [{:keys [attrs]}]
+  {:district {:aac (:aac attrs)
+              :parent (:parent-aac attrs)
+              :description (:description attrs)}})
 
+(defmethod area "location"
+  [{:keys [attrs content]}]
+  {:location {:aac (:aac attrs)
+              :parent (:parent-aac attrs)
+              :description (:description attrs)
+              :content (reduce #(conj %1 (forecast-period-parser %2)) [] content)}})
+
+(defmethod area :default
+  [_])
 
 (defn- forecast-parser
   [parsed-xml]
