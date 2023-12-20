@@ -2,7 +2,8 @@
   (:require [honey.sql :as sql]
             [clojure.java.io :as io]
             [next.jdbc :as jdbc]
-            [clojure.data.xml :as xml]))
+            [clojure.data.xml :as xml]
+            [java-time.api :as jt])
 
 ;; command line args parsing
 
@@ -16,6 +17,9 @@
                  (if (= (:tag x) :expiry-time)
                    (first (:content x))
                    acc)) "")))
+
+(defn unixtime [x] (-> (jt/offset-date-time x)
+                       (jt/to-millis-from-epoch)))
 
 (defmulti area (fn [x] (get-in x [:attrs :type])))
 
