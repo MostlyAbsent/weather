@@ -21,6 +21,35 @@
 (defn unixtime [x] (-> (jt/offset-date-time x)
                        (jt/to-millis-from-epoch)))
 
+(defmulti forecast-content (fn [x] (get-in x [:attrs :type])))
+
+(defmethod forecast-content "forecast_icon_code"
+  [{:keys [content]}]
+  {:forecastIconCode (first content)})
+
+(defmethod forecast-content "probability_of_precipitation"
+  [{:keys [content]}]
+  {:precipitiationProbability (first content)})
+
+(defmethod forecast-content "air_temperature_minimum"
+  [{:keys [content]}]
+  {:tempMin (first content)})
+
+(defmethod forecast-content "air_temperature_maximum"
+  [{:keys [content]}]
+  {:tempMax (first content)})
+
+(defmethod forecast-content "precipitation_range"
+  [{:keys [content]}]
+  {:precipitationRange (first content)})
+
+(defmethod forecast-content "precis"
+  [{:keys [content]}]
+  {:precis (first content)})
+
+(defmethod forecast-content :default
+  [args]
+  {:unhandled-key true})
 (defmulti area (fn [x] (get-in x [:attrs :type])))
 
 (defmethod area "region"
