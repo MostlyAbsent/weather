@@ -87,9 +87,8 @@
   (->> parsed-xml
        second
        :content
-       (map area)
-       (filter #(not (nil? %)))
-       #_(map #(get-in % [:attrs :type] "notfound"))))
+       (reduce #(conj %1 (area %2)) [])
+       (filter #(not (nil? %)))))
 
 ;; Transaction
 
