@@ -19,21 +19,21 @@ model Forecast {
 model ForecastPeriod {
     id Int @id @default(autoincrement())
 
-    districtKey               String
-    districtDescription       String
-    endTime                   DateTime
-    forecast                  Forecast @relation(fields: [forecastID], references: [id])
-    forecastID                Int
-    forecastIconCode          Int
-    index                     Int
-    locationDescription       String
-    locationKey               String
-    precipitiationProbability Int
-    precipitiationRange       String?
-    precis                    String
-    regionKey                 String
-    regionDescription         String
-    startTime                 DateTime
-    tempMax                   Int
-    tempMin                   Int?
+    districtKey              String
+    districtDescription      String
+    endTime                  DateTime
+    forecast                 Forecast @relation(fields: [forecastID], references: [id])
+    forecastID               Int
+    forecastIconCode         Int
+    index                    Int
+    locationDescription      String
+    locationKey              String
+    precipitationProbability Int
+    precipitationRange       String?
+    precis                   String
+    regionKey                String
+    regionDescription        String
+    startTime                DateTime
+    tempMax                  Int?
+    tempMin                  Int?
 }
