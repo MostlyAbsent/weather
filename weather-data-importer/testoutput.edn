@@ -1,4 +1,4 @@
-{:expiry "2023-12-05T12:31:28Z",
+{:expiry 1701779488000,
  :forecast
  ({:precipitiationProbability "0%",
    :index "0",

@@ -2,6 +2,9 @@
   (:require
    [java-time.api :as jt]))
 
+(defn unixtime [x] (-> (jt/offset-date-time x)
+                       (jt/to-millis-from-epoch)))
+
 (defn expiry-parser
   [parsed-xml]
   (->> parsed-xml
@@ -9,11 +12,10 @@
        :content
        (reduce (fn [acc x]
                  (if (= (:tag x) :expiry-time)
-                   (first (:content x))
+                   (-> (:content x)
+                       first
+                       unixtime)
                    acc)) "")))
-
-(defn unixtime [x] (-> (jt/offset-date-time x)
-                       (jt/to-millis-from-epoch)))
 
 (defmulti forecast-content (fn [x] (get-in x [:attrs :type])))
 
