@@ -25,7 +25,8 @@
 
 (defmethod forecast-content "probability_of_precipitation"
   [{:keys [content]}]
-  {:precipitiationProbability (first content)})
+  {:precipitationProbability
+   (first content)})
 
 (defmethod forecast-content "air_temperature_minimum"
   [{:keys [content]}]
