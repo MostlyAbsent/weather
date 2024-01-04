@@ -45,12 +45,9 @@
                               (map #(merge db/forecast-proto {:forecastID forecast-id} %))
                               vec))))
 
+
 (comment
 
-  (def dev-db-def {:dbtype "sqlite" :dbname "db.sqlite"})
+  (importer)
 
-  (def dev-db-conn (jdbc/get-datasource dev-db-def))
-
-  (main dev-db-conn)
-
-  "IDW14199.xml")
+  )
