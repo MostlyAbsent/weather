@@ -30,13 +30,20 @@
      :forecast forecast}))
 
 (defn main
-  [forecast db-conn]
-  (let [{:keys [expiry forecast]} (read-forecast forecast)
+  [db-conn]
+  (let [filename (str  (System/getProperty "java.io.tmpdir") (rand-int 9999) ".xml")
+        forecast (if (ftp/with-ftp [client "ftp://ftp.bom.gov.au/anon/gen/fwo/"
+                                    :username "anonymous"
+                                    :password "guest"]
+                       (ftp/client-get client "IDW14199.xml" filename))
+                   filename
+                   (throw (java.io.FileNotFoundException. "FTP failed to dowload file.")))
+        {:keys [expiry forecast]} (read-forecast forecast)
         forecast-id (db/new-forecast-id! db-conn expiry)]
     (db/insert-forecast! db-conn
-                      (->> forecast
-                           (map #(merge db/forecast-proto {:forecastID forecast-id} %))
-                           vec))))
+                         (->> forecast
+                              (map #(merge db/forecast-proto {:forecastID forecast-id} %))
+                              vec))))
 
 (comment
 
@@ -44,10 +51,6 @@
 
   (def dev-db-conn (jdbc/get-datasource dev-db-def))
 
-  (main "IDW14199.xml" dev-db-conn)
+  (main dev-db-conn)
 
-  (ftp/with-ftp [client "ftp://ftp.bom.gov.au/anon/gen/fwo/"
-                 :username "anonymous"
-                 :password "guest"]
-    (ftp/client-get client "IDW14199.xml" "downloaded.xml"))
-)
+  "IDW14199.xml")
