@@ -36,3 +36,25 @@
                         :Forecast/id)]
     forecast-id))
 
+(defn insert-forecast!
+  [db-conn forecast]
+  (sql/insert-multi! db-conn :ForecastPeriod forecast))
+
+(def forecast-proto
+  {:districtDescription ""
+   :districtKey ""
+   :endTime nil
+   :forecastID nil
+   :forecastIconCode nil
+   :idx nil
+   :locationDescription ""
+   :locationKey ""
+   :precipitationProbability nil
+   :precipitationRange nil
+   :precis ""
+   :regionDescription ""
+   :regionKey ""
+   :startTime nil
+   :tempMax nil
+   :tempMin nil})
+
