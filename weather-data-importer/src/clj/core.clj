@@ -58,3 +58,12 @@
    :tempMax nil
    :tempMin nil})
 
+(defn main
+  [forecast db-conn]
+  (let [{:keys [expiry forecast]} (read-forecast forecast)
+        forecast-id (new-forecast-id! db-conn expiry)]
+    (insert-forecast! db-conn
+                      (->> forecast
+                           (map #(merge forecast-proto {:forecastID forecast-id} %))
+                           vec))))
+
