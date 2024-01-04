@@ -38,3 +38,16 @@
                            (map #(merge db/forecast-proto {:forecastID forecast-id} %))
                            vec))))
 
+(comment
+
+  (def dev-db-def {:dbtype "sqlite" :dbname "db.sqlite"})
+
+  (def dev-db-conn (jdbc/get-datasource dev-db-def))
+
+  (main "IDW14199.xml" dev-db-conn)
+
+  (ftp/with-ftp [client "ftp://ftp.bom.gov.au/anon/gen/fwo/"
+                 :username "anonymous"
+                 :password "guest"]
+    (ftp/client-get client "IDW14199.xml" "downloaded.xml"))
+)
