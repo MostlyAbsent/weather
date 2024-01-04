@@ -31,7 +31,7 @@
 
 (defn main
   [db-conn]
-  (let [filename (str  (System/getProperty "java.io.tmpdir") (rand-int 9999) ".xml")
+  (let [filename (str (System/getProperty "java.io.tmpdir") (rand-int 9999) ".xml")
         forecast (if (ftp/with-ftp [client "ftp://ftp.bom.gov.au/anon/gen/fwo/"
                                     :username "anonymous"
                                     :password "guest"]
