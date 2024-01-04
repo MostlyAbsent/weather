@@ -25,7 +25,7 @@ model ForecastPeriod {
     forecast                 Forecast @relation(fields: [forecastID], references: [id])
     forecastID               Int
     forecastIconCode         Int
-    index                    Int
+    idx                      Int
     locationDescription      String
     locationKey              String
     precipitationProbability Int
