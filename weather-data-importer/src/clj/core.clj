@@ -3,6 +3,7 @@
    [clojure.data.xml :as xml]
    [clojure.java.io :as io]
    [clojure.pprint :as pp]
+   [clojure.tools.cli :refer [parse-opts]]
    db
    [miner.ftp :as ftp]
    [next.jdbc :as jdbc]
