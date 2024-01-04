@@ -11,6 +11,10 @@
 
 ;; command line args parsing
 
+(def cli-options
+  [["-d" "--database DATABASE" "Sqlite database file"
+    :validate [#(.exists (io/file %))]]])
+
 ;; Transaction
 
 ;; Insert forecast and expiry
@@ -29,9 +33,10 @@
     {:expiry expiry
      :forecast forecast}))
 
-(defn main
-  [db-conn]
-  (let [filename (str (System/getProperty "java.io.tmpdir") (rand-int 9999) ".xml")
+(defn importer
+  []
+  (let [db-conn (jdbc/get-datasource {:dbtype "sqlite" :dbname #_parsed-db-name "db.sqlite"})
+        filename (str (System/getProperty "java.io.tmpdir") (rand-int 9999) ".xml")
         forecast (if (ftp/with-ftp [client "ftp://ftp.bom.gov.au/anon/gen/fwo/"
                                     :username "anonymous"
                                     :password "guest"]
@@ -45,6 +50,8 @@
                               (map #(merge db/forecast-proto {:forecastID forecast-id} %))
                               vec))))
 
+(defn -main []
+  (importer))
 
 (comment
 
