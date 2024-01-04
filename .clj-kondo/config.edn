@@ -1,0 +1,1 @@
+{:lint-as {miner.ftp/with-ftp clojure.core/let}}
