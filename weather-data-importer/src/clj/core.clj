@@ -1,10 +1,11 @@
 (ns core
   (:require
-   [clojure.java.io :as io]
-   [next.jdbc :as jdbc]
-   [next.jdbc.sql :as sql]
-   [clojure.pprint :as pp]
    [clojure.data.xml :as xml]
+   [clojure.java.io :as io]
+   [clojure.pprint :as pp]
+   db
+   [miner.ftp :as ftp]
+   [next.jdbc :as jdbc]
    parsers)
   (:gen-class))
 
