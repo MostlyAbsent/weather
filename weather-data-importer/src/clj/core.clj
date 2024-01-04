@@ -32,7 +32,7 @@
   "Inserts the expiry as a new forecast and returns the ID generated."
   [db-conn expiry]
   (let [forecast-id (-> (sql/insert! db-conn
-                                       :forecast {:expiry expiry} {:suffix "RETURNING *"})
+                                     :forecast {:expiry expiry} {:suffix "RETURNING *"})
                         :Forecast/id)]
-    {:id forecast-id}))
+    forecast-id))
 
