@@ -18,6 +18,16 @@
 
 ;; invoke main
 
+(defn read-forecast
+  [file]
+  (let [input (io/reader file)
+        parsed (-> (xml/parse input)
+                   :content)
+        expiry (parsers/expiry-parser parsed)
+        forecast (parsers/forecast-parser parsed)]
+    {:expiry expiry
+     :forecast forecast}))
+
 (defn new-forecast-id!
   "Inserts the expiry as a new forecast and returns the ID generated."
   [db-conn expiry]
