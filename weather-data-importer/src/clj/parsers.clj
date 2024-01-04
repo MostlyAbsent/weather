@@ -58,7 +58,7 @@
                                (filter #(= regionKey (get %1 :aac)))
                                first
                                :description)]
-    (merge {:index (:index attrs)
+    (merge {:idx (:index attrs)
             :startTime (unixtime (:start-time-utc attrs))
             :endTime (unixtime (:end-time-utc attrs))
             :locationKey aac
