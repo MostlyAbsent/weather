@@ -29,42 +29,12 @@
     {:expiry expiry
      :forecast forecast}))
 
-(defn new-forecast-id!
-  "Inserts the expiry as a new forecast and returns the ID generated."
-  [db-conn expiry]
-  (let [forecast-id (-> (sql/insert! db-conn
-                                     :forecast {:expiry expiry} {:suffix "RETURNING *"})
-                        :Forecast/id)]
-    forecast-id))
-
-(defn insert-forecast!
-  [db-conn forecast]
-  (sql/insert-multi! db-conn :ForecastPeriod forecast))
-
-(def forecast-proto
-  {:districtDescription ""
-   :districtKey ""
-   :endTime nil
-   :forecastID nil
-   :forecastIconCode nil
-   :idx nil
-   :locationDescription ""
-   :locationKey ""
-   :precipitationProbability nil
-   :precipitationRange nil
-   :precis ""
-   :regionDescription ""
-   :regionKey ""
-   :startTime nil
-   :tempMax nil
-   :tempMin nil})
-
 (defn main
   [forecast db-conn]
   (let [{:keys [expiry forecast]} (read-forecast forecast)
-        forecast-id (new-forecast-id! db-conn expiry)]
-    (insert-forecast! db-conn
+        forecast-id (db/new-forecast-id! db-conn expiry)]
+    (db/insert-forecast! db-conn
                       (->> forecast
-                           (map #(merge forecast-proto {:forecastID forecast-id} %))
+                           (map #(merge db/forecast-proto {:forecastID forecast-id} %))
                            vec))))
 
