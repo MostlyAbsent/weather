@@ -66,6 +66,11 @@ In thinking about it when it comes to deployment I don't think this needs to be 
 
 Prisma stores DateTimes and unix timestamps, nice and easy to work with.
 
+All done.
+
+#### Deploy:TODO
+Need to build the jar artefact and copy to the weather app.
+
 # Web router 
 
 The selection of create-t3-app should make my router un-needed.
