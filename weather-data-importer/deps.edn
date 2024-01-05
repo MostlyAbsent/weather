@@ -7,6 +7,5 @@
         org.clojure/data.xml {:mvn/version "0.0.8"}
         org.xerial/sqlite-jdbc {:mvn/version "3.44.1.0"}}
  :aliases
- {:build
-  {:deps {}
-   :ns-default build}}}
+ {:build {:deps {io.github.clojure/tools.build {:git/tag "v0.9.6" :git/sha "8e78bcc"}}
+          :ns-default build}}}
