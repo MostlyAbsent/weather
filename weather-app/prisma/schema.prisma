@@ -18,7 +18,7 @@ model Forecast {
 
 model Locations {
     id                  Int    @id @default(autoincrement())
-    locationKey         String
+    locationKey         String @unique
     locationDescription String
 }
 

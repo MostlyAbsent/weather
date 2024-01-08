@@ -12,7 +12,17 @@
 
 (defn insert-locations!
   [db-conn locations]
-  (sql/insert-multi! db-conn :Locations locations))
+  (doseq [{:keys [locationKey locationDescription]} locations]
+    (if (= 0 (-> (sql/update! db-conn
+                            :Locations
+                            {:locationKey locationKey
+                             :locationDescription locationDescription}
+                            {:locationKey locationKey})
+                 :next.jdbc/update-count))
+      (sql/insert! db-conn
+                   :Locations
+                   {:locationKey locationKey
+                    :locationDescription locationDescription}))))
 
 (defn insert-forecast!
   [db-conn forecast]
