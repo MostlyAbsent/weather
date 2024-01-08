@@ -16,6 +16,12 @@ model Forecast {
     ForecastPeriod ForecastPeriod[]
 }
 
+model Location {
+    id                  Int    @id @default(autoincrement())
+    locationKey         String
+    locationDescription String
+}
+
 model ForecastPeriod {
     id Int @id @default(autoincrement())
 
