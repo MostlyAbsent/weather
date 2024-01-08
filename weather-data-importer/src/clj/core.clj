@@ -9,19 +9,10 @@
    parsers)
   (:gen-class))
 
-;; command line args parsing
 
 (def cli-options
   [["-d" "--dbname DATABASE" "Sqlite database file"
     :validate [#(.exists (io/file %))]]])
-
-;; Transaction
-;;
-;; Insert forecast and expiry
-
-;; Insert
-
-;; invoke main
 
 (defn read-forecast
   [file]
