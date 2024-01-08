@@ -20,9 +20,10 @@
         parsed (-> (xml/parse input)
                    :content)
         expiry (parsers/expiry-parser parsed)
-        forecast (parsers/forecast-parser parsed)]
+        {:keys [locations forecastPeriods]} (parsers/forecast-parser parsed)]
     {:expiry expiry
-     :forecast forecast}))
+     :forecast forecastPeriods
+     :locations locations}))
 
 (defn importer
   [parsed-db-name]
@@ -34,8 +35,9 @@
                        (ftp/client-get client "IDW14199.xml" filename))
                    filename
                    (throw (java.io.FileNotFoundException. "FTP failed to dowload file.")))
-        {:keys [expiry forecast]} (read-forecast forecast)
+        {:keys [expiry forecast locations]} (read-forecast forecast)
         forecast-id (db/new-forecast-id! db-conn expiry)]
+    (db/insert-locations! db-conn (vec locations))
     (db/insert-forecast! db-conn
                          (->> forecast
                               (map #(merge db/forecast-proto {:forecastID forecast-id} %))

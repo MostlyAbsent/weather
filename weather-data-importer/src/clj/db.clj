@@ -10,6 +10,10 @@
                         :Forecast/id)]
     forecast-id))
 
+(defn insert-locations!
+  [db-conn locations]
+  (sql/insert-multi! db-conn :Locations locations))
+
 (defn insert-forecast!
   [db-conn forecast]
   (sql/insert-multi! db-conn :ForecastPeriod forecast))
