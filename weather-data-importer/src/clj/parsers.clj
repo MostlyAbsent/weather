@@ -89,7 +89,9 @@
         description (:description attrs)
         districts (:districts acc)
         regions (:regions acc)]
-    {:location (reduce #(conj %1 (forecast-period-parser %2 aac parent description districts regions)) [] content)}))
+    {:location {:locationKey aac
+                :locationDescription description
+                :forecastPeriods (reduce #(conj %1 (forecast-period-parser %2 aac parent description districts regions)) [] content)}}))
 
 (defn spread-areas
   [acc x]
@@ -99,12 +101,17 @@
     (cond
       (= :region k) (merge acc {:regions (conj (:regions acc) v)})
       (= :district k) (merge acc {:districts (conj (:districts acc) v)})
-      (= :location k) (merge acc {:locations (flatten (conj (:locations acc) v))}))))
+      (= :location k) (merge acc {:locations (flatten
+                                              (conj (:locations acc)
+                                                    {:locationKey (:locationKey v)
+                                                     :locationDescription (:locationDescription v)}))
+                                  :forecastPeriods (flatten
+                                                     (conj (:forecastPeriods acc)
+                                                           (:forecastPeriods v)))}))))
 
 (defn forecast-parser
   [parsed-xml]
   (->> parsed-xml
        second
        :content
-       (reduce spread-areas {:districts [] :regions [] :locations []})
-       :locations))
+       (reduce spread-areas {:districts [] :regions [] :locations [] :forecastPeriods []})))
