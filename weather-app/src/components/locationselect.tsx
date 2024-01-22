@@ -38,11 +38,13 @@ const FormSchema = z.object({
 });
 
 interface LocationSelector {
-  locations: {
-    id: number;
-    locationKey: string;
-    locationDescription: string;
-  }[];
+  locations:
+    | {
+        id: number;
+        locationKey: string;
+        locationDescription: string;
+      }[]
+    | undefined;
 }
 
 export const LocationSelector: FC<LocationSelector> = ({ locations }) => {
