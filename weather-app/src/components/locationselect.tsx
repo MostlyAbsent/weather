@@ -85,7 +85,7 @@ export const LocationSelector: FC<LocationSelector> = ({ locations }) => {
                       )}
                     >
                       {field.value
-                        ? locations.find(
+                        ? locations?.find(
                             (location) => location.locationKey === field.value,
                           )?.locationDescription
                         : "Select location"}
@@ -100,7 +100,7 @@ export const LocationSelector: FC<LocationSelector> = ({ locations }) => {
                       placeholder="Search language..."
                     />
                     <CommandEmpty>No location found.</CommandEmpty>
-                    <CommandGroup className="text-white">
+                    <CommandGroup className="max-h-[300px] overflow-y-scroll text-white">
                       {locations?.map((location) => (
                         <CommandItem
                           value={location.locationDescription}
