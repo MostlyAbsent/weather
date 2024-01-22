@@ -4,7 +4,7 @@ import { api } from "@/utils/api";
 import { LocationSelector } from "@/components/locationselect";
 
 export default function Home() {
-  const hello = api.post.hello.useQuery({ text: "from tRPC" });
+  const { data: locations } = api.locations.getLocations.useQuery();
 
   return (
     <>
@@ -18,7 +18,7 @@ export default function Home() {
             Weather In Western Australia
           </h1>
           <div className="flex max-w-4xl flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20">
-            <LocationSelector></LocationSelector>
+            <LocationSelector locations={locations}></LocationSelector>
           </div>
         </div>
       </main>

@@ -29,17 +29,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { toast } from "@/components/ui/use-toast";
-
-const locations = [
-  { label: "Beacon", value: "WA_PT180" },
-  { label: "Mukinbudin", value: "WA_PT257" },
-  { label: "Dowerin", value: "WA_PT251" },
-  { label: "Cunderdin", value: "WA_PT250" },
-  { label: "Southern Cross", value: "WA_PT059" },
-  { label: "Merredin", value: "WA_PT043" },
-  { label: "Northam", value: "WA_PT050" },
-  { label: "Dalwallinu", value: "WA_PT022" },
-] as const;
+import { FC } from "react";
 
 const FormSchema = z.object({
   locationKey: z.string({
@@ -47,7 +37,15 @@ const FormSchema = z.object({
   }),
 });
 
-export function LocationSelector() {
+interface LocationSelector {
+  locations: {
+    id: number;
+    locationKey: string;
+    locationDescription: string;
+  }[];
+}
+
+export const LocationSelector: FC<LocationSelector> = ({ locations }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
@@ -86,8 +84,8 @@ export function LocationSelector() {
                     >
                       {field.value
                         ? locations.find(
-                            (location) => location.value === field.value,
-                          )?.label
+                            (location) => location.locationKey === field.value,
+                          )?.locationDescription
                         : "Select location"}
                       <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
@@ -101,23 +99,23 @@ export function LocationSelector() {
                     />
                     <CommandEmpty>No location found.</CommandEmpty>
                     <CommandGroup className="text-white">
-                      {locations.map((location) => (
+                      {locations?.map((location) => (
                         <CommandItem
-                          value={location.label}
-                          key={location.value}
+                          value={location.locationDescription}
+                          key={location.locationKey}
                           onSelect={() => {
-                            form.setValue("locationKey", location.value);
+                            form.setValue("locationKey", location.locationKey);
                           }}
                         >
                           <Check
                             className={cn(
                               "mr-2 h-4 w-4",
-                              location.value === field.value
+                              location.locationKey === field.value
                                 ? "opacity-100"
                                 : "opacity-0",
                             )}
                           />
-                          {location.label}
+                          {location.locationDescription}
                         </CommandItem>
                       ))}
                     </CommandGroup>
@@ -135,4 +133,4 @@ export function LocationSelector() {
       </form>
     </Form>
   );
-}
+};
