@@ -42,7 +42,7 @@ const locations = [
 ] as const;
 
 const FormSchema = z.object({
-  language: z.string({
+  locationKey: z.string({
     required_error: "Please select a language.",
   }),
 });
@@ -53,6 +53,7 @@ export function LocationSelector() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log(data);
     toast({
       title: "You submitted the following values:",
       description: (
@@ -68,10 +69,10 @@ export function LocationSelector() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
-          name="language"
+          name="locationKey"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Language</FormLabel>
+              <FormLabel>Location</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl className="bg-primary">
@@ -85,9 +86,9 @@ export function LocationSelector() {
                     >
                       {field.value
                         ? locations.find(
-                            (language) => language.value === field.value,
+                            (location) => location.value === field.value,
                           )?.label
-                        : "Select language"}
+                        : "Select location"}
                       <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                   </FormControl>
@@ -98,25 +99,25 @@ export function LocationSelector() {
                       className="text-white"
                       placeholder="Search language..."
                     />
-                    <CommandEmpty>No language found.</CommandEmpty>
+                    <CommandEmpty>No location found.</CommandEmpty>
                     <CommandGroup className="text-white">
-                      {locations.map((language) => (
+                      {locations.map((location) => (
                         <CommandItem
-                          value={language.label}
-                          key={language.value}
+                          value={location.label}
+                          key={location.value}
                           onSelect={() => {
-                            form.setValue("language", language.value);
+                            form.setValue("locationKey", location.value);
                           }}
                         >
                           <Check
                             className={cn(
                               "mr-2 h-4 w-4",
-                              language.value === field.value
+                              location.value === field.value
                                 ? "opacity-100"
                                 : "opacity-0",
                             )}
                           />
-                          {language.label}
+                          {location.label}
                         </CommandItem>
                       ))}
                     </CommandGroup>
